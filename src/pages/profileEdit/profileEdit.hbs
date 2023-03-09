@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div class="form-template">
+        {{> title title="МОЙ ПРОФИЛЬ"}}
+        {{> avatar nickname="@thevolkov" symbol="И"}}
+        {{> input id="signin-name-id" type="text" value="Игорь" placeholder="Имя" class="input"}}
+        {{> input id="signin-surname-id" type="text" value="Волков" placeholder="Фамилия" class="input"}}
+        {{> input id="signin-login-id" type="text" value="thevolkov" placeholder="Логин" class="input"}}
+        {{> input id="signin-phone-id" type="tel" value="+7-999-888-77-66" placeholder="Телефон" class="input"}}
+        {{> link href="/profile-edit" text="Сохранить" class="link__black"}}
+        {{> link href="/profile" text="Назад"}}
+        {{> link href="/signin" text="Удалить профайл" class="link__red"}}
+    </div>
+</div>

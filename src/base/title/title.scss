@@ -1,0 +1,28 @@
+@import "src/styles/variable";
+
+.title {
+  font-family: 'Bitter', serif;
+  font-weight: bold;
+
+  &__error {
+    font-size: $xl;
+    color: $dark-red;
+
+    &__code {
+      font-size: $l;
+      color: $half-black;
+      position: absolute;
+      top: 20px;
+      right: -60px;
+      font-weight: bold;
+    }
+  }
+}
+
+.subtitle {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  top: 125px;
+}

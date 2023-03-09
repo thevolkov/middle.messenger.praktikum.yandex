@@ -1,0 +1,13 @@
+@import "src/styles/variable";
+
+.profile {
+  &__value {
+    text-align: center;
+    p {
+      margin-top: $s;
+    }
+  }
+  &__value:last-of-type {
+    margin-bottom: $l;
+  }
+}

@@ -1,0 +1,78 @@
+@import "variable";
+@import "../base/input/input";
+@import "../base/link/link";
+@import "../base/title/title";
+@import "../base/avatar/avatar";
+@import "../pages/profile/profile";
+
+html {
+  font-family: 'PT Sans', serif;
+  box-sizing: border-box;
+  color: $black;
+  height: 100vh;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow-y: hidden;
+  font-size: 14px;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: $l;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: $l;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.position {
+  &__relative {
+    position: relative;
+  }
+  &__absolute {
+    position: absolute;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-template {
+  width: 350px;
+}
+
+.error-template {
+  position: relative;
+}
+
+.small-text {
+  font-size: $s;
+  color: $half-black;
+}

@@ -1,30 +1,40 @@
 {
-  "name": "practicum-chatik",
+  "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "engines": {
+    "node": ">=14.16.1"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ],
   "dependencies": {
-    "express": "^4.18.2",
     "handlebars": "^4.7.7",
-    "sass": "^1.58.3"
+    "sass": "^1.58.3",
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "parcel": "^2.8.3"
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3",
+    "parcel-transformer-hbs": "^1.0.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && npm run serve",
+    "build": "npm run clean && parcel build index.html",
+    "serve": "node ./server.js",
+    "clean": "rm -rf ./dist/*"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thevolkov/practicum-chatik.git"
+    "url": "git+https://github.com/thevolkov/middle.messenger.praktikum.yandex.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thevolkov/practicum-chatik/issues"
+    "url": "https://github.com/thevolkov/middle.messenger.praktikum.yandex/issues"
   },
-  "homepage": "https://github.com/thevolkov/practicum-chatik#readme",
-  "engines": {
-    "node": ">=14.16.1"
-  }
+  "homepage": "https://github.com/thevolkov/middle.messenger.praktikum.yandex#readme"
 }
