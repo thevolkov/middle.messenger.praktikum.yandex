@@ -2,11 +2,8 @@
 
 .input-container {
   position: relative;
-  margin: $s 0 $m 0;
+  margin-bottom: $l;
   text-align: center;
-  &:last-of-type {
-    margin-bottom: $l;
-  }
 }
 
 .input {
@@ -46,6 +43,7 @@ label {
   position: absolute;
   color: $half-black;
   top: -50%;
+  left: 0;
   width: 100%;
   text-align: center;
   font-size: 10px;
