@@ -1,7 +1,10 @@
 # Яндекс.Чат
-Посмотреть онлайн: [Netlify](https://gleeful-klepon-1a7b09.netlify.app/)
 
-### Для запуска проекта:
+## Дизайн-проект приложения: [Figma](https://www.figma.com/file/X0G01rvd99aNa4b87C2Pkx/%D0%A7%D0%B0%D1%82?t=vAuBwxf7OpYfVMfb-6)
+
+## Посмотреть приложение онлайн: [Netlify](https://gleeful-klepon-1a7b09.netlify.app/)
+
+### Для запуска локальной версии проекта:
 - Склонировать репозиторий
 - Инициализировать проект в корневой папке - `npm i`
 - Запустить проект из корневой папки - `npm run start`
