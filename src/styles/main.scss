@@ -17,13 +17,18 @@ body {
   margin: 0;
   position: relative;
   overflow-y: hidden;
-  font-size: 14px;
+  font-size: $m;
 }
 
 h1 {
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: $l;
+  font-size: $l;
+  margin: 0 0 $l 0;
+}
+
+input {
+  font-family: 'PT Sans', serif;
 }
 
 .wrapper {
@@ -75,4 +80,11 @@ h1 {
 .small-text {
   font-size: $s;
   color: $half-black;
+}
+.double-button {
+  display: inline-flex;
+  width: 100%;
+  :first-of-type {
+    margin-right: $s;
+  }
 }

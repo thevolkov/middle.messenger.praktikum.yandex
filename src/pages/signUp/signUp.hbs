@@ -1,14 +1,17 @@
-<div class="wrapper">
-    <div class="form-template">
-        {{> title title="Регистрация"}}
-        {{> input id="signup-name-id" type="text" placeholder="Имя" class="input"}}
-        {{> input id="signup-surname-id" type="text" placeholder="Фамилия" class="input"}}
-        {{> input id="signup-mail-id" type="email" placeholder="Почта" class="input"}}
-        {{> input id="signup-login-id" type="text" placeholder="Логин" class="input"}}
-        {{> input id="signup-phone-id" type="tel" placeholder="Телефон" class="input"}}
-        {{> input id="signup-pass-id" type="password" placeholder="Пароль" class="input"}}
-        {{> input id="signup-pass-duplicate-id" type="password" placeholder="Повторить пароль" class="input"}}
-        {{> link href="/signup" text="ЗАРЕГИСТРИРОВАТЬСЯ" class="link__black"}}
-        {{> link href="/signin" text="Войти"}}
+<main id="main-content">
+    <div class="wrapper">
+        <div class="form-template">
+            {{> title title="Регистрация"}}
+            <form method="POST">
+                {{> input name="first_name" type="text" placeholder="Имя" class="input"}}
+                {{> input name="second_name" type="text" placeholder="Фамилия" class="input"}}
+                {{> input name="login" type="text" placeholder="Логин" class="input"}}
+                {{> input name="email" type="email" placeholder="Почта" class="input"}}
+                {{> input name="phone" type="tel" placeholder="Телефон" class="input"}}
+                {{> input name="password" type="password" placeholder="Пароль" class="input"}}
+                {{> link href="/signup" text="ЗАРЕГИСТРИРОВАТЬСЯ" class="link__black"}}
+            </form>
+            {{> link href="/signin" text="Войти"}}
+        </div>
     </div>
-</div>
+</main>

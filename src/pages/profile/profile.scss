@@ -3,11 +3,13 @@
 .profile {
   &__value {
     text-align: center;
+
     p {
-      margin-top: $s;
+      margin: 0;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-  }
-  &__value:last-of-type {
-    margin-bottom: $l;
   }
 }

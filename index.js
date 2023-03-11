@@ -7,7 +7,8 @@ import {
     page500,
     chat,
     profile,
-    profileEdit
+    profileEdit,
+    changePassword
 } from './src/pages/index'
 
 switch (window.location.pathname) {
@@ -26,6 +27,9 @@ switch (window.location.pathname) {
         break
     case '/profile-edit':
         profileEdit()
+        break
+    case '/change-password':
+        changePassword()
         break
     case '/404':
         page404()

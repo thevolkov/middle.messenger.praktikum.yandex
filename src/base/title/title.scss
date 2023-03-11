@@ -1,19 +1,23 @@
 @import "src/styles/variable";
 
+.title-template {
+  position: relative;
+}
+
 .title {
   font-family: 'Bitter', serif;
   font-weight: bold;
 
   &__error {
-    font-size: $xl;
+    font-size: $xxl;
     color: $dark-red;
 
     &__code {
       font-size: $l;
       color: $half-black;
       position: absolute;
-      top: 20px;
-      right: -60px;
+      bottom: 75%;
+      left: 100%;
       font-weight: bold;
     }
   }
@@ -24,5 +28,5 @@
   position: absolute;
   width: 100%;
   margin: 0;
-  top: 125px;
+  top: 100%;
 }

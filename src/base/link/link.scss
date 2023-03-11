@@ -9,26 +9,31 @@
   height: 30px;
   background: $white;
   border-radius: 5px;
+
   &:visited {
     color: $black;
   }
+
   &__black {
     background: $black;
     color: $white;
     text-decoration: none;
     text-transform: uppercase;
     height: 50px;
-    margin: $m 0;
+    margin: $l 0;
+
     &:visited {
       color: $white;
     }
   }
+
   &__red {
     color: $dark-red;
     margin-top: $l;
     position: absolute;
     bottom: $l;
     left: 0;
+
     &:visited {
       color: $dark-red;
     }

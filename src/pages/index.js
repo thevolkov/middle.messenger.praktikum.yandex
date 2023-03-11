@@ -5,6 +5,7 @@ import page500 from './500/500';
 import chat from './chat/chat';
 import profile from './profile/profile';
 import profileEdit from './profileEdit/profileEdit';
+import changePassword from './changePassword/changePassword';
 
 export {
     signIn,
@@ -13,5 +14,6 @@ export {
     page500,
     chat,
     profile,
-    profileEdit
+    profileEdit,
+    changePassword
 }
