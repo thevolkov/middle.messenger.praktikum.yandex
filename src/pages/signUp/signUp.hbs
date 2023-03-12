@@ -1,0 +1,17 @@
+<main id="main-content">
+    <div class="wrapper">
+        <div class="form-template">
+            {{> title title="Регистрация"}}
+            <form method="POST">
+                {{> input name="first_name" type="text" placeholder="Имя" class="input"}}
+                {{> input name="second_name" type="text" placeholder="Фамилия" class="input"}}
+                {{> input name="login" type="text" placeholder="Логин" class="input"}}
+                {{> input name="email" type="email" placeholder="Почта" class="input"}}
+                {{> input name="phone" type="tel" placeholder="Телефон" class="input"}}
+                {{> input name="password" type="password" placeholder="Пароль" class="input"}}
+                {{> link href="/signup" text="ЗАРЕГИСТРИРОВАТЬСЯ" class="link__black"}}
+            </form>
+            {{> link href="/signin" text="Войти"}}
+        </div>
+    </div>
+</main>

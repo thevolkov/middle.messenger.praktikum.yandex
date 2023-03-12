@@ -1,0 +1,42 @@
+@import "src/styles/variable";
+
+.input-container {
+  position: relative;
+  text-align: center;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  font-size: $m;
+  color: $black;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid $light-black;
+  border-radius: 5px;
+  text-align: center;
+
+  &::placeholder {
+    color: $white;
+  }
+
+  &:focus-visible {
+    box-sizing: border-box;
+    border-top: 1px solid $white;
+    border-left: 1px solid $white;
+    border-right: 1px solid $white;
+    border-bottom: 1px solid $black;
+    border-radius: 0;
+    outline: none;
+  }
+}
+
+label {
+  color: $half-black;
+  width: 100%;
+  text-align: center;
+  font-size: $s;
+  pointer-events: none; // чтобы клики проходили сквозь label
+}

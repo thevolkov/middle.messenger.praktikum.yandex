@@ -1,0 +1,38 @@
+<main id="main-content">
+    <div class="wrapper">
+        <div class="form-template">
+            {{> title title="МОЙ ПРОФИЛЬ"}}
+            {{> avatar nickname="@thevolkov" symbol="И"}}
+            <div class="profile__value">
+                <span class="small-text">Имя</span>
+                <p>Игорь</p>
+            </div>
+            <div class="profile__value">
+                <span class="small-text">Фамилия</span>
+                <p>Волков</p>
+            </div>
+            <div class="profile__value">
+                <span class="small-text">Имя в чате</span>
+                <p>George-9802</p>
+            </div>
+            <div class="profile__value">
+                <span class="small-text">Логин</span>
+                <p>thevolkov</p>
+            </div>
+            <div class="profile__value">
+                <span class="small-text">Почта</span>
+                <p>info@thevolkov.ru</p>
+            </div>
+            <div class="profile__value">
+                <span class="small-text">Телефон</span>
+                <p>+7-999-888-77-66</p>
+            </div>
+            <div class="double-button">
+                {{> link href="/profile-edit" text="РЕДАКТИРОВАТЬ" class="link__black"}}
+                {{> link href="/change-password" text="Сменить пароль" class="link__black"}}
+            </div>
+            {{> link href="/signin" text="Назад"}}
+            {{> link href="/signin" text="Выйти" class="link__red"}}
+        </div>
+    </div>
+</main>
