@@ -1,13 +1,13 @@
-import Component from '../../utils/Component';
-import template from './signUp.hbs';
-import Button from '../../base/button/button';
-import Input from '../../base/input/input';
-import Link from '../../base/link/link';
-import Form from '../../components/form/form';
-import Title from '../../base/title/title';
+import Component from '../../utils/Component'
+import template from './signUp.hbs'
+import Button from '../../base/button/button'
+import Input from '../../base/input/input'
+import Link from '../../base/link/link'
+import Form from '../../components/form/form'
+import Title from '../../base/title/title'
 
 export default class SignupPage extends Component {
-  constructor() {
+  constructor () {
     const props = {
       class: 'form-template',
       form: new Form({
@@ -47,39 +47,39 @@ export default class SignupPage extends Component {
           text: 'Меню навигации',
         }),
       ],
-    };
+    }
 
     props.events = {
       submit: {
         handler: (e: { preventDefault: () => void }) => {
-          console.log('Signup FormHbs - submit event');
-          e.preventDefault();
-          Input.validate();
+          console.log('Signup FormHbs - submit event')
+          e.preventDefault()
+          Input.validate()
         },
         capture: false,
       },
       focus: {
         handler: (e: { preventDefault: () => void }) => {
-          e.preventDefault();
-          console.log('Signup FormHbs - focus event');
+          e.preventDefault()
+          console.log('Signup FormHbs - focus event')
         },
         capture: true,
       },
       blur: {
-        handler: (e: { preventDefault: () => void; target: HTMLInputElement | null }) => {
-          e.preventDefault();
-          console.log('SignUp FormHbs - blur event');
+        handler: (e: { preventDefault: () => void, target: HTMLInputElement | null }) => {
+          e.preventDefault()
+          console.log('SignUp FormHbs - blur event')
           if (e.target != null && e.target instanceof HTMLInputElement) {
-            Input.validateInputs(e.target);
+            Input.validateInputs(e.target)
           }
         },
         capture: true,
       },
-    };
-    super('main', props);
+    }
+    super('main', props)
   }
 
-  render(): string {
-    return template(this.getPropsAndChildren());
+  render (): string {
+    return template(this.getPropsAndChildren())
   }
 }

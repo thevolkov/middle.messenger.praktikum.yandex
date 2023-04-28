@@ -1,10 +1,10 @@
-import Component from '../../utils/Component';
-import template from './500.hbs';
-import Title from '../../base/title/title';
-import Link from '../../base/link/link';
+import Component from '../../utils/Component'
+import template from './500.hbs'
+import Title from '../../base/title/title'
+import Link from '../../base/link/link'
 
 export default class Page500 extends Component {
-  constructor() {
+  constructor () {
     super('main', {
       class: 'wrapper',
       title: new Title({
@@ -21,10 +21,10 @@ export default class Page500 extends Component {
           },
           text: 'Меню навигации',
         }),
-    });
+    })
   }
 
-  render(): string {
-    return template(this.getPropsAndChildren());
+  render (): string {
+    return template(this.getPropsAndChildren())
   }
 }

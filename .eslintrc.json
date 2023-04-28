@@ -6,23 +6,20 @@
     "es2017": true
   },
   "extends": [
-    "eslint:recommended",
-    "airbnb-typescript/base",
-    "prettier"
+    "standard-with-typescript"
   ],
   "parser": "@typescript-eslint/parser",
-  "overrides": [],
   "parserOptions": {
-    "project": "tsconfig.json",
-    "sourceType": "module"
+    "ecmaVersion": "latest",
+    "project": ["tsconfig.json"]
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
   "rules": {
-    "no-underscore-dangle": 0,
-    "no-unused-vars": "warn"
+    "indent": "off",
+    "max-len": [1, 200],
+    "require-jsdoc": 0,
+    "space-before-function-paren": ["error", "always"],
+    "@typescript-eslint/comma-dangle": [2, "always-multiline"],
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
   }
 }
 

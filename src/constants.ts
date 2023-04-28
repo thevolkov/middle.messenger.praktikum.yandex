@@ -5,8 +5,8 @@ export const Links = [
   { url: '#profile-edit', text: 'Редактировать профиль' },
   { url: '#change-password', text: 'Сменить пароль' },
   { url: '#chat', text: 'Чат' },
-  { url: '#error404', text:'Страница 404'},
-  { url: '#error500', text:'Страница 500'},
+  { url: '#error404', text: 'Страница 404' },
+  { url: '#error500', text: 'Страница 500' },
 ]
 export const enum PageIds {
   SignIn = 'signin',

@@ -1,20 +1,20 @@
 import EventBus from './EventBus'
 
-type Props = { [key: string]: any };
+type Props = Record<string, any>
 
-export default class Component<P extends Props = Props> {
+export default class Component {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_CDR: 'flow:component-did-render',
     FLOW_RENDER: 'flow:render',
-  };
+  }
 
   protected _element: HTMLElement | undefined
   protected _meta: Record<string, unknown>
   protected props: Props
-  protected children: Record<string, Component<any> | Component<any>[]>
+  protected children: Record<string, Component | Component[]>
   protected eventBus: EventBus
 
   constructor (tag: string, all: Props) {
@@ -86,11 +86,11 @@ export default class Component<P extends Props = Props> {
     Object.entries(attr).forEach(([key, value]) => {
       if (key === 'class') {
         if (typeof value === 'string') {
-          this._element.classList.add(value);
+          this._element.classList.add(value)
         }
       }
       if (key === 'class' && Array.isArray(value)) {
-        this._element.classList.add(...value);
+        this._element.classList.add(...value)
       } else {
         this._element[key] = value
       }
@@ -130,10 +130,10 @@ export default class Component<P extends Props = Props> {
     Object.entries(this.children).forEach(([key, value]) => {
       if (value instanceof Component) {
         combined[key] = value.element.outerHTML
-      } else {// value is Component[]
+      } else { // value is Component[]
         combined[key] = ''
         value.forEach((child) => {
-          combined[key] = (combined[key] as string) + (child.element.outerHTML as string)
+          combined[key] = (combined[key] as string) + (child.element.outerHTML)
         })
       }
     })
@@ -161,7 +161,7 @@ export default class Component<P extends Props = Props> {
     })
     /* Object.keys(events).forEach((eventName) => {
       this._element.addEventListener(eventName, events[eventName])
-    })*/
+    }) */
   }
 
   private _removeEvents (): void {

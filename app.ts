@@ -3,68 +3,68 @@ import './src/styles/main.scss'
 import SignIn from './src/pages/signIn/signIn'
 import SignUp from './src/pages/signUp/signUp'
 import MainPage from './src/pages/mainPage/mainPage'
-import Profile from './src/pages/profile/profile';
-import ProfileEdit from './src/pages/profileEdit/profileEdit';
-import ChangePassword from './src/pages/changePassword/changePassword';
-import Page404 from './src/pages/404/404';
-import Page500 from './src/pages/500/500';
-import Chat from './src/pages/chat/chat';
-import { PageIds } from './src/constants';
+import Profile from './src/pages/profile/profile'
+import ProfileEdit from './src/pages/profileEdit/profileEdit'
+import ChangePassword from './src/pages/changePassword/changePassword'
+import Page404 from './src/pages/404/404'
+import Page500 from './src/pages/500/500'
+import Chat from './src/pages/chat/chat'
+import { PageIds } from './src/constants'
 
 export default class App {
-  private static readonly bodyContainer: HTMLElement = document.body;
+  private static readonly bodyContainer: HTMLElement = document.body
 
-  static pages(pageId: string): void {
-    let page: Component | null = null;
+  static pages (pageId: string): void {
+    let page: Component | null = null
 
     switch (pageId) {
       case PageIds.Chat:
-        page = new Chat(pageId);
-        break;
-        case PageIds.SignIn:
-        page = new SignIn(pageId);
-        break;
+        page = new Chat()
+        break
+      case PageIds.SignIn:
+        page = new SignIn()
+        break
       case PageIds.SignUp:
-        page = new SignUp(pageId);
-        break;
+        page = new SignUp()
+        break
       case PageIds.Profile:
-        page = new Profile(pageId);
-        break;
+        page = new Profile()
+        break
       case PageIds.ProfileEdit:
-        page = new ProfileEdit(pageId);
-        break;
+        page = new ProfileEdit()
+        break
       case PageIds.ChangePassword:
-        page = new ChangePassword(pageId);
-        break;
-        case PageIds.Page404:
-        page = new Page404(pageId);
-        break;
-        case PageIds.Page500:
-        page = new Page500(pageId);
-        break;
+        page = new ChangePassword()
+        break
+      case PageIds.Page404:
+        page = new Page404()
+        break
+      case PageIds.Page500:
+        page = new Page500()
+        break
       default:
-        page = new MainPage(pageId);
-        break;
+        page = new MainPage()
+        break
     }
 
-    if (page) {
-      App.bodyContainer.innerHTML = '';
-      App.bodyContainer.append(page.element);
+    if (page !== null) {
+      App.bodyContainer.innerHTML = ''
+      App.bodyContainer.append(page.element)
     }
   }
 
-  enableRouteChange(): void {
+  enableRouteChange (): void {
     const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      App.pages(hash);
-    };
+      const hash = window.location.hash.slice(1)
+      App.pages(hash)
+    }
 
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange)
+    handleHashChange()
   }
 
-  run(): void {
-    App.pages(PageIds.MainPage);
-    this.enableRouteChange();
+  run (): void {
+    App.pages(PageIds.MainPage)
+    this.enableRouteChange()
   }
 }

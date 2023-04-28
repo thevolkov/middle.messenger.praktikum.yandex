@@ -1,10 +1,10 @@
-import Component from '../../../../utils/Component';
-import template from './chatList.hbs';
-import Link from '../../../../base/link/link';
-import ChatItem from '../chatItem/chatItem';
+import Component from '../../../../utils/Component'
+import template from './chatList.hbs'
+import Link from '../../../../base/link/link'
+import ChatItem from '../chatItem/chatItem'
 
 export default class ChatList extends Component {
-  constructor() {
+  constructor () {
     super('div',
       {
         attr: { class: 'sidebar' },
@@ -41,10 +41,10 @@ export default class ChatList extends Component {
             count: '15',
           }),
         ],
-      });
+      })
   }
 
-  render(): string {
-    return template(this.getPropsAndChildren());
+  render (): string {
+    return template(this.getPropsAndChildren())
   }
 }

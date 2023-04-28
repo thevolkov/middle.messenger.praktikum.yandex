@@ -1,18 +1,18 @@
-import Component from '../../utils/Component';
-import template from './chat.hbs';
-import chatList from './chatBlocks/chatList/chatList';
-import chatPanel from './chatBlocks/chatPanel/chatPanel';
+import Component from '../../utils/Component'
+import template from './chat.hbs'
+import ChatList from './chatBlocks/chatList/chatList'
+import ChatPanel from './chatBlocks/chatPanel/chatPanel'
 
 export default class Chat extends Component {
-  constructor() {
+  constructor () {
     super('div', {
       attr: { class: 'chat' },
-      chatList: new chatList(),
-      chatPanel: new chatPanel(),
-    });
+      chatList: new ChatList(),
+      chatPanel: new ChatPanel(),
+    })
   }
 
-  render(): string {
-    return template(this.getPropsAndChildren());
+  render (): string {
+    return template(this.getPropsAndChildren())
   }
 }

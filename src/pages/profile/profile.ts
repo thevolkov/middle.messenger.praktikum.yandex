@@ -1,12 +1,12 @@
-import Component from '../../utils/Component';
-import template from './profile.hbs';
-import Button from '../../base/button/button';
-import Title from '../../base/title/title';
-import Link from '../../base/link/link';
-import { ProfileData } from './constants';
+import Component from '../../utils/Component'
+import template from './profile.hbs'
+import Button from '../../base/button/button'
+import Title from '../../base/title/title'
+import Link from '../../base/link/link'
+import { ProfileData } from './constants'
 
 export default class ProfilePage extends Component {
-  constructor() {
+  constructor () {
     super('main', {
       title: new Title({
         attr: { class: 'title' },
@@ -35,10 +35,10 @@ export default class ProfilePage extends Component {
           text: 'Меню навигации',
         }),
       ],
-    });
+    })
   }
 
-  render(): string {
-    return template(this.getPropsAndChildren());
+  render (): string {
+    return template(this.getPropsAndChildren())
   }
 }
