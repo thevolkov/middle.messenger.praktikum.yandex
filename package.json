@@ -6,26 +6,32 @@
     "node": ">=14.16.1"
   },
   "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "Firefox ESR",
-    "not dead"
+    "> .5% and last 2 versions",
+    "not dead",
+    "not OperaMini all",
+    "ie >= 11",
+    "Edge >= 12"
   ],
   "dependencies": {
-    "handlebars": "4.7.7",
-    "sass": "1.58.3",
-    "express": "4.18.2"
+    "express": "4.18.2",
+    "sass": "1.58.3"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.3",
+    "@parcel/validator-typescript": "^2.8.3",
     "parcel": "2.8.3",
-    "parcel-transformer-hbs": "1.0.4"
+    "parcel-transformer-hbs": "1.0.4",
+    "typescript": "~4.5.5"
   },
   "scripts": {
     "start": "npm run build && npm run serve",
     "build": "npm run clean && parcel build index.html",
     "serve": "node ./server.js",
-    "clean": "rm -rf ./dist/*"
+    "dev": "parcel index.html --port 3000",
+    "clean": "rm -rf ./dist/*",
+    "eslint": "eslint . --ext .ts --fix",
+    "stylelint": "stylelint './src/**/*.scss' --fix",
+    "prettier": "prettier ./src"
   },
   "repository": {
     "type": "git",

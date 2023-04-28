@@ -1,13 +1,4 @@
-<main id="main-content">
-    <div class="wrapper">
-        <div class="form-template">
-            {{> title title="Яндекс.Чат"}}
-            <form method="POST">
-                {{> input name="login" type="text" placeholder="Логин" class="input"}}
-                {{> input name="password" type="password" placeholder="Пароль" class="input"}}
-                {{> link href="/chat" text="ВОЙТИ" class="link__black"}}
-            </form>
-            {{> link href="/signup" text="Зарегистрироваться"}}
-        </div>
-    </div>
-</main>
+<div class={{class}}>
+  {{{form}}}
+  {{{link}}}
+</div>
