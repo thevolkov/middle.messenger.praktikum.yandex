@@ -23,7 +23,7 @@ body {
 }
 
 html {
-  font-family: 'PT Sans', serif;
+  font-family: "PT Sans", serif;
   box-sizing: border-box;
   color: $black;
 }
@@ -41,10 +41,6 @@ h1 {
   text-transform: uppercase;
   font-size: $l;
   margin: 0 0 $l 0;
-}
-
-input {
-  font-family: 'PT Sans', serif;
 }
 
 main {
@@ -84,6 +80,7 @@ input {
   padding: 5px $s;
   height: $l;
   outline: none;
+  font-family: "PT Sans", serif;
 }
 
 .position {
