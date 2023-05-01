@@ -61,9 +61,9 @@ export default class Component {
   }
 
   render (): string {
-    return typeof this.props.text === 'string'
-      ? this.props.text
-      : ''
+    return typeof this.props.text === 'string' ?
+      this.props.text :
+      ''
   }
 
   _render (): void {
@@ -76,9 +76,13 @@ export default class Component {
 
   componentDidMount (): void {}
 
-  private _componentDidMount (): void { this.componentDidMount() }
+  private _componentDidMount (): void {
+    this.componentDidMount()
+  }
 
-  componentDidUpdate (_prev: Props, _props: Props): boolean { return true }
+  componentDidUpdate (_prev: Props, _props: Props): boolean {
+    return true
+  }
 
   _componentDidUpdate (prev: Props, props: Props): void {
     const render = this.componentDidUpdate(prev, props)
@@ -90,19 +94,19 @@ export default class Component {
     const { attr = {} }: { attr?: Record<string, unknown> } = this.props
 
     Object.entries(attr).forEach(([key, value]) => {
-      key === 'class'
-        ? typeof value === 'string'
-          ? this._element?.classList.add(value)
-          : Array.isArray(value) && this._element?.classList.add(...value)
-        : this._element?.setAttribute(key, String(value))
+      key === 'class' ?
+        typeof value === 'string' ?
+          this._element?.classList.add(value) :
+          Array.isArray(value) && this._element?.classList.add(...value) :
+        this._element?.setAttribute(key, String(value))
     })
   }
 
   private _makePropsProxy (props: Props): Props {
     return new Proxy(props, {
-      get: (target: Props, prop: string) => (typeof target[prop] === 'function')
-        ? target[prop].bind(target)
-        : target[prop],
+      get: (target: Props, prop: string) => (typeof target[prop] === 'function') ?
+        target[prop].bind(target) :
+        target[prop],
       set: (target: Props, prop: string, value: unknown) => {
         target[prop] = value
         return true
@@ -130,7 +134,9 @@ export default class Component {
 
   getContent = (): HTMLElement => this.element
 
-  hide (): void { this.getContent().style.display = 'none' }
+  hide (): void {
+    this.getContent().style.display = 'none'
+  }
 
   private _addEvents (): void {
     const { events = {} } = this.props

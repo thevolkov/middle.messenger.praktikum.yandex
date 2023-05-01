@@ -30,7 +30,7 @@ export default class HTTPTransport {
         xhr.withCredentials = true
 
         if (options.headers != null) {
-          Object.keys(options.headers).forEach(key => {
+          Object.keys(options.headers).forEach((key) => {
             if (options.headers != null) xhr.setRequestHeader(key, options.headers[key])
           })
         }
