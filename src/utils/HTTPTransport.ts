@@ -14,6 +14,8 @@ type Options = {
 
 type Url = string | URL
 
+type HTTPMethod = (url: Url, options?: Options) => Promise<unknown>
+
 function queryStringify (data: Record<string, string>): string {
   return Object.keys(data).reduce((acc, value, index) => {
     return `${acc}${value}=${data[value]}${index < Object.keys(data).length - 1 ? '&' : ''}`
@@ -58,20 +60,20 @@ export default class HTTPTransport {
     }
   }
 
-  get = async (url: Url, options: Options): Promise<unknown> => {
+  get: HTTPMethod = async (url: Url, options: Options) => {
     const query = (options.data !== undefined && options.data !== null) ? queryStringify(options.data) : ''
     return await this.request(`${url.toString()}${query}`, { ...options, method: METHODS.GET }, options.timeout)
   }
 
-  put = async (url: Url, options: Options): Promise<unknown> => {
+  put: HTTPMethod = async (url: Url, options: Options) => {
     return await this.request(url, { ...options, method: METHODS.PUT }, options.timeout)
   }
 
-  post = async (url: Url, options: Options): Promise<unknown> => {
+  post: HTTPMethod = async (url: Url, options: Options) => {
     return await this.request(url, { ...options, method: METHODS.POST }, options.timeout)
   }
 
-  delete = async (url: Url, options: Options): Promise<unknown> => {
+  delete: HTTPMethod = async (url: Url, options: Options) => {
     return await this.request(url, { ...options, method: METHODS.DELETE }, options.timeout)
   }
 }

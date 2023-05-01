@@ -22,6 +22,7 @@ export default class ChangePassword extends Component {
         button: new Button({
           attr: {
             class: ['button', 'button__black'],
+            type: 'submit',
           },
           text: 'СОХРАНИТЬ',
         }),
