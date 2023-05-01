@@ -2,10 +2,21 @@
 
 .title-template {
   position: relative;
+
+  & .subtitle {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    top: 100%;
+    font-weight: 400;
+    font-size: $m;
+    color: $black;
+  }
 }
 
 .title {
-  font-family: 'Bitter', serif;
+  font-family: Bitter, serif;
   font-weight: bold;
 
   &__error {
@@ -13,7 +24,7 @@
     color: $dark-red;
 
     &__code {
-      font-size: $l;
+      font-size: $m;
       color: $half-black;
       position: absolute;
       bottom: 75%;
@@ -21,12 +32,4 @@
       font-weight: bold;
     }
   }
-}
-
-.subtitle {
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  margin: 0;
-  top: 100%;
 }

@@ -1,0 +1,18 @@
+@import "../../../../styles/variable";
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  border-right: 1px solid $half-black;
+  height: 100vh;
+
+  & a {
+    margin: $s 0;
+  }
+
+  & input {
+    margin: $m;
+    width: 90%;
+  }
+}

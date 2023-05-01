@@ -1,15 +1,31 @@
 @import "variable";
 @import "../base/input/input";
+@import "../base/button/button";
 @import "../base/link/link";
 @import "../base/title/title";
 @import "../base/avatar/avatar";
 @import "../pages/profile/profile";
+@import "../pages/chat/chat";
+@import "../pages/chat/chatBlocks/chatItem/chatItem";
+@import "../pages/chat/chatBlocks/chatList/chatList";
+@import "../pages/chat/chatBlocks/chatPanel/chatPanel";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
+}
 
 html {
-  font-family: 'PT Sans', serif;
+  font-family: "PT Sans", serif;
   box-sizing: border-box;
   color: $black;
-  height: 100vh;
 }
 
 body {
@@ -27,11 +43,7 @@ h1 {
   margin: 0 0 $l 0;
 }
 
-input {
-  font-family: 'PT Sans', serif;
-}
-
-.wrapper {
+main {
   box-sizing: border-box;
   height: 100vh;
   padding: $l;
@@ -40,10 +52,42 @@ input {
   align-items: center;
 }
 
+li {
+  text-align: center;
+  list-style: none;
+  padding-bottom: $m;
+
+  & a {
+    color: $black;
+    text-decoration: underline;
+  }
+}
+
+button {
+  border: 1px solid $black;
+  padding: 5px;
+  min-width: $l;
+  height: $l;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 5px $s;
+  height: $l;
+  outline: none;
+  font-family: "PT Sans", serif;
+}
+
 .position {
   &__relative {
     position: relative;
   }
+
   &__absolute {
     position: absolute;
   }
@@ -81,9 +125,11 @@ input {
   font-size: $s;
   color: $half-black;
 }
+
 .double-button {
   display: inline-flex;
   width: 100%;
+
   :first-of-type {
     margin-right: $s;
   }

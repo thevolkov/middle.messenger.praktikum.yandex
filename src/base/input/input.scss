@@ -1,4 +1,15 @@
-@import "src/styles/variable";
+@import "../../styles/variable";
+
+.input-wrapper {
+  margin-bottom: $s;
+
+  & span {
+    font-size: $s;
+    color: $dark-red;
+    margin: 2px 0;
+    position: absolute;
+  }
+}
 
 .input-container {
   position: relative;
@@ -16,7 +27,7 @@
   background-clip: padding-box;
   border: 1px solid $light-black;
   border-radius: 5px;
-  text-align: center;
+  padding-left: $m;
 
   &::placeholder {
     color: $white;
@@ -38,5 +49,5 @@ label {
   width: 100%;
   text-align: center;
   font-size: $s;
-  pointer-events: none; // чтобы клики проходили сквозь label
+  pointer-events: none;
 }

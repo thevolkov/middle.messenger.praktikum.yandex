@@ -1,19 +1,4 @@
-<main id="main-content">
-    <div class="wrapper">
-        <div class="form-template">
-            {{> title title="МОЙ ПРОФИЛЬ" subtitle="Редактирование"}}
-            {{> avatar nickname="@thevolkov" symbol="И"}}
-            <form method="POST">
-                {{> input name="first_name" type="text" value="Игорь" placeholder="Имя" class="input"}}
-                {{> input name="second_name" type="text" value="Волков" placeholder="Фамилия" class="input"}}
-                {{> input name="display_name" type="text" value="George-9802" placeholder="Имя в чате" class="input"}}
-                {{> input name="login" type="text" value="thevolkov" placeholder="Логин" class="input"}}
-                {{> input name="email" type="email" value="info@thevolkov.ru" placeholder="Почта" class="input"}}
-                {{> input name="phone" type="tel" value="+7-999-888-77-66" placeholder="Телефон" class="input"}}
-                {{> link href="/profile" text="Сохранить" class="link__black"}}
-            </form>
-            {{> link href="/profile" text="Вернуться в профиль"}}
-            {{> link href="/signin" text="Удалить профиль" class="link__red"}}
-        </div>
-    </div>
-</main>
+<div class={{class}}>
+  {{{form}}}
+  {{{link}}}
+</div>
