@@ -42,29 +42,29 @@ export default class LoginPage extends Component {
           text: 'Меню навигации',
         }),
       ],
-    }
-    props.events = {
-      submit: {
-        handler: (e: { preventDefault: () => void }) => {
-          e.preventDefault()
-          Input.validate()
+      events: {
+        submit: {
+          handler: (event: { preventDefault: () => void }) => {
+            event.preventDefault()
+            Input.validation()
+          },
+          capture: false,
         },
-        capture: false,
-      },
-      focus: {
-        handler: (e) => {
-          e.preventDefault()
+        focus: {
+          handler: (event: { preventDefault: () => void }) => {
+            event.preventDefault()
+          },
+          capture: true,
         },
-        capture: true,
-      },
-      blur: {
-        handler: (e) => {
-          e.preventDefault()
-          if (e.target != null && e.target instanceof HTMLInputElement) {
-            Input.validateInputs(e.target)
-          }
+        blur: {
+          handler: (event: { preventDefault: () => void, target: HTMLInputElement | null }) => {
+            event.preventDefault()
+            if (event.target !== null && event.target instanceof HTMLInputElement) {
+              Input.checkInput(event.target)
+            }
+          },
+          capture: true,
         },
-        capture: true,
       },
     }
     super('main', props)

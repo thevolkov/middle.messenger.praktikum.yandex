@@ -1,6 +1,11 @@
 import EventBus from './EventBus'
 
 type Props = Record<string, any>
+type Handler = (event: Event) => void
+type EventHandler = {
+  handler: Handler
+  [key: string]: any
+}
 
 export default class Component {
   static EVENTS = {
@@ -11,8 +16,8 @@ export default class Component {
     FLOW_RENDER: 'flow:render',
   }
 
-  protected _element: HTMLElement | undefined
-  protected _meta: Record<string, unknown>
+  protected _element?: HTMLElement
+  protected _meta: Record<string, any>
   protected props: Props
   protected children: Record<string, Component | Component[]>
   protected eventBus: EventBus
@@ -20,11 +25,15 @@ export default class Component {
   constructor (tag: string, all: Props) {
     this._meta = { tag, all }
 
-    const tempProps = {}
-    const tempChildren = {}
+    const tempProps: Record<string, unknown> = {}
+    const tempChildren: Record<string, Component | Component[]> = {}
+
     Object.entries(all).forEach(([key, value]) => {
-      if (value instanceof Component ||
-        (Array.isArray(value) && value.length > 0 && value[0] instanceof Component)) {
+      if (value instanceof Component || (
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value[0] instanceof Component
+      )) {
         tempChildren[key] = value
       } else {
         tempProps[key] = value
@@ -33,7 +42,6 @@ export default class Component {
 
     this.props = this._makePropsProxy(tempProps)
     this.children = tempChildren
-
     this.eventBus = new EventBus()
     this.registerEvents()
     this.eventBus.emit(Component.EVENTS.INIT)
@@ -52,132 +60,89 @@ export default class Component {
     this.eventBus.emit(Component.EVENTS.FLOW_RENDER)
   }
 
-  private _componentDidMount (): void {
-    this.componentDidMount()
-  }
-
-  componentDidMount (): void {
-  }
-
-  dispatchComponentDidMount (): void {
-    this.eventBus.emit(Component.EVENTS.FLOW_CDM)
-  }
-
-  _componentDidUpdate (oldProps: Props, newProps: Props): void {
-    const needRender = this.componentDidUpdate(oldProps, newProps)
-    if (needRender) {
-      _render()
-    }
-  }
-
-  componentDidUpdate (oldProps: Props, newProps: Props): boolean {
-    return true
+  render (): string {
+    return typeof this.props.text === 'string'
+      ? this.props.text
+      : ''
   }
 
   _render (): void {
+    if (this._element !== null && this._element !== undefined) this._element.innerHTML = this.render()
+
     this._removeEvents()
-    this._element.innerHTML = this.render()
     this._addAttributes()
     this._addEvents()
   }
 
-  private _addAttributes (): void {
-    const { attr = {} } = this.props
-    Object.entries(attr).forEach(([key, value]) => {
-      if (key === 'class') {
-        if (typeof value === 'string') {
-          this._element.classList.add(value)
-        }
-      }
-      if (key === 'class' && Array.isArray(value)) {
-        this._element.classList.add(...value)
-      } else {
-        this._element[key] = value
-      }
-    })
+  componentDidMount (): void {}
+
+  private _componentDidMount (): void { this.componentDidMount() }
+
+  componentDidUpdate (_prev: Props, _props: Props): boolean { return true }
+
+  _componentDidUpdate (prev: Props, props: Props): void {
+    const render = this.componentDidUpdate(prev, props)
+
+    if (render) this._render()
   }
 
-  render (): string {
-    const text = this.props.text
-    if (typeof text === 'string') {
-      return text
-    }
-    return ''
+  private _addAttributes (): void {
+    const { attr = {} }: { attr?: Record<string, unknown> } = this.props
+
+    Object.entries(attr).forEach(([key, value]) => {
+      key === 'class'
+        ? typeof value === 'string'
+          ? this._element?.classList.add(value)
+          : Array.isArray(value) && this._element?.classList.add(...value)
+        : this._element?.setAttribute(key, String(value))
+    })
   }
 
   private _makePropsProxy (props: Props): Props {
     return new Proxy(props, {
-      get (target: Props, prop: string): unknown {
-        const value = target[prop]
-        return typeof value === 'function' ? value.bind(target) : value
-      },
-      set (target: Props, prop: string, value: unknown): boolean {
+      get: (target: Props, prop: string) => (typeof target[prop] === 'function')
+        ? target[prop].bind(target)
+        : target[prop],
+      set: (target: Props, prop: string, value: unknown) => {
         target[prop] = value
         return true
       },
-      deleteProperty (): boolean {
-        throw new Error('Нет доступа')
+      deleteProperty: () => {
+        throw new Error('Error!')
       },
     })
   }
 
   get element (): HTMLElement {
+    if (this._element == null) throw new Error('Element is undefined.')
+
     return this._element
   }
 
   getPropsAndChildren (): Props {
-    const combined = { ...this.props }
-    Object.entries(this.children).forEach(([key, value]) => {
-      if (value instanceof Component) {
-        combined[key] = value.element.outerHTML
-      } else { // value is Component[]
-        combined[key] = ''
-        value.forEach((child) => {
-          combined[key] = (combined[key] as string) + (child.element.outerHTML)
-        })
-      }
-    })
+    return Object.entries(this.children).reduce((combined, [key, value]) => {
+      if (value instanceof Component) combined[key] = value.element.outerHTML
+      else combined[key] = value.reduce((acc: string, child: Component) => acc + child.element.outerHTML, '')
 
-    return combined
+      return combined
+    }, { ...this.props })
   }
 
-  getContent (): HTMLElement {
-    return this.element
-  }
+  getContent = (): HTMLElement => this.element
 
-  show (): void {
-    this.getContent().style.display = 'block'
-  }
-
-  hide (): void {
-    this.getContent().style.display = 'none'
-  }
+  hide (): void { this.getContent().style.display = 'none' }
 
   private _addEvents (): void {
     const { events = {} } = this.props
-
     Object.entries(events).forEach(([key, value]) => {
-      this._element.addEventListener(key, value.handler, value.capture)
+      this._element?.addEventListener(key, (value as EventHandler).handler, (value as EventHandler).capture)
     })
-    /* Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(eventName, events[eventName])
-    }) */
   }
 
   private _removeEvents (): void {
     const { events = {} } = this.props
-
     Object.entries(events).forEach(([key, value]) => {
-      this._element.removeEventListener(key, value.handler)
+      this._element?.removeEventListener(key, (value as EventHandler).handler)
     })
-  }
-
-  static renderDOM (query: string, block: Component): Element {
-    const root = document.querySelector(query)
-
-    root.append(block.getContent())
-    block.dispatchComponentDidMount()
-
-    return root
   }
 }

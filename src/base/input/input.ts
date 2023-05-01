@@ -11,7 +11,7 @@ class Input extends Component {
 }
 
 export default class Inputs extends Component {
-  constructor (className: string, type: string, value?: string) {
+  constructor (className: string, type: string) {
     const props = {
       attr: { class: 'input-wrapper' },
       class: className,
@@ -35,71 +35,47 @@ export default class Inputs extends Component {
   }
 
   render (): string {
-    this.children.span.hide()
+    if (!Array.isArray(this.children.span)) this.children.span.hide()
     return template(this.getPropsAndChildren())
   }
 
-  static validate (): boolean {
-    const fields = {}
+  static validatePatterns (input: HTMLInputElement): boolean {
+    const patterns: Record<string, RegExp> = {
+      name: /^[A-ZЁА-Я][A-Za-zЁёА-Яа-я-]*$/,
+      login: /^(?=.*[A-Za-z])[A-Za-z0-9-_]{3,20}$/,
+      email: /^[A-Za-z0-9._%+-]+@[A-Za-z]+\.[A-Za-z]+$/,
+      password: /^(?=.*[A-Z])(?=.*[0-9]).{8,20}$/,
+      phone: /^\+?[0-9]{10,15}$/,
+    }
+    const pattern = patterns[input.name]
+    if (pattern === undefined) return true
+
+    return pattern.test(input.value)
+  }
+
+  static checkInput (input: HTMLInputElement): void {
+    const parentNode = input.parentNode
+    const grandparentNode = parentNode?.parentNode
+    const span = grandparentNode?.querySelector('span')
+    const isValid = this.validatePatterns(input)
+    if (span === undefined || span === null) return
+    if (isValid) {
+      span.style.display = 'none'
+      console.log(input.name + ' Validation OK')
+    } else {
+      span.style.display = 'block'
+      console.error(input.name + ' Validation ERROR')
+    }
+  }
+
+  static validation (): boolean {
+    const fields: Record<string, any> = {}
     const result = true
     const inputs = document.querySelectorAll('input')
     inputs.forEach((input) => {
-      Inputs.validateInputs(input)
+      Inputs.checkInput(input)
       fields[input.name] = input.value
     })
-    return result
-  }
-
-  static validateInputs (input: HTMLInputElement): boolean {
-    const span = input.parentNode.parentNode.querySelector('span') as HTMLSpanElement
-
-    if (this.validateInput(input)) {
-      console.log('OK, ' + input.name + ': ' + input.value)
-      span.style.display = 'none'
-      return true
-    } else {
-      span.style.display = 'block'
-      console.log('Validation failed: ' + input.name + ': ' + input.value)
-      return false
-    }
-  }
-
-  static validateInput (input: HTMLInputElement): boolean {
-    if (input.value === null || input.value === '') {
-      return false
-    }
-    const name = /^[A-ZЁА-Я][A-Za-zЁёА-Яа-я-]*$/ // new RegExp('^[ЁА-ЯA-Z]+[ЁёА-Яа-я-]$')
-    const login = /^(?=.*[A-Za-z])[A-Za-z0-9-_]{3,20}$/ // new RegExp('^(?=.*[A-Za-z])[A-Za-z0-9]{3,20}$')
-    const email = /^[A-Za-z0-9._%+-]+@[A-Za-z]+\.[A-Za-z]+$/ // new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z]+.[A-Za-z]$')
-    const password = /^(?=.*[A-Z])(?=.*[0-9]).{8,40}$/ // new RegExp('^(?=.*[A-Z])(?=.*[0-9]).{8,40}$')
-    const phone = /^\+?[0-9]{10,15}$/ // new RegExp('^[\+]?[0-9]{10,15}$')
-    const message = /^.+$/ // new RegExp('^.+$')
-
-    let result = true
-
-    switch (input.name) {
-      case 'first_name':
-      case 'second_name':
-        result = name.test(input.value)
-        break
-      case 'login':
-        result = login.test(input.value)
-        break
-      case 'email':
-        result = email.test(input.value)
-        break
-      case 'password':
-        result = password.test(input.value)
-        break
-      case 'phone':
-        result = phone.test(input.value)
-        break
-      case 'message':
-        result = message.test(input.value)
-        break
-      default:
-        break
-    }
     return result
   }
 }

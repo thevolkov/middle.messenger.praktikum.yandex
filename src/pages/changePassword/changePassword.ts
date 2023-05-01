@@ -42,29 +42,29 @@ export default class ChangePassword extends Component {
           text: 'Меню навигации',
         }),
       ],
-    }
-    props.events = {
-      submit: {
-        handler: (e: { preventDefault: () => void }) => {
-          e.preventDefault()
-          Input.validate()
+      events: {
+        submit: {
+          handler: (events: { preventDefault: () => void }) => {
+            events.preventDefault()
+            Input.validation()
+          },
+          capture: false,
         },
-        capture: false,
-      },
-      focus: {
-        handler: (e) => {
-          e.preventDefault()
+        focus: {
+          handler: (events: { preventDefault: () => void }) => {
+            events.preventDefault()
+          },
+          capture: true,
         },
-        capture: true,
-      },
-      blur: {
-        handler: (e) => {
-          e.preventDefault()
-          if (e.target != null && e.target instanceof HTMLInputElement) {
-            Input.validateInputs(e.target)
-          }
+        blur: {
+          handler: (events: { preventDefault: () => void, target: HTMLInputElement | null }) => {
+            events.preventDefault()
+            if (events.target != null && events.target instanceof HTMLInputElement) {
+              Input.checkInput(events.target)
+            }
+          },
+          capture: true,
         },
-        capture: true,
       },
     }
     super('main', props)

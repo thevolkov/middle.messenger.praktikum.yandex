@@ -1,70 +1,65 @@
-import type Component from './src/utils/Component'
-import './src/styles/main.scss'
-import SignIn from './src/pages/signIn/signIn'
-import SignUp from './src/pages/signUp/signUp'
-import MainPage from './src/pages/mainPage/mainPage'
-import Profile from './src/pages/profile/profile'
-import ProfileEdit from './src/pages/profileEdit/profileEdit'
-import ChangePassword from './src/pages/changePassword/changePassword'
-import Page404 from './src/pages/404/404'
-import Page500 from './src/pages/500/500'
-import Chat from './src/pages/chat/chat'
-import { PageIds } from './src/constants'
+import './src/styles/main.scss';
+import SignIn from './src/pages/signIn/signIn';
+import SignUp from './src/pages/signUp/signUp';
+import MainPage from './src/pages/mainPage/mainPage';
+import Profile from './src/pages/profile/profile';
+import ProfileEdit from './src/pages/profileEdit/profileEdit';
+import ChangePassword from './src/pages/changePassword/changePassword';
+import Page404 from './src/pages/404/404';
+import Page500 from './src/pages/500/500';
+import Chat from './src/pages/chat/chat';
+import { Pages } from './src/constants';
 
 export default class App {
-  private static readonly bodyContainer: HTMLElement = document.body
+  private static readonly body = document.body;
 
-  static pages (pageId: string): void {
-    let page: Component | null = null
+  static pages(id: string): void {
+    let page;
 
-    switch (pageId) {
-      case PageIds.Chat:
-        page = new Chat()
-        break
-      case PageIds.SignIn:
-        page = new SignIn()
-        break
-      case PageIds.SignUp:
-        page = new SignUp()
-        break
-      case PageIds.Profile:
-        page = new Profile()
-        break
-      case PageIds.ProfileEdit:
-        page = new ProfileEdit()
-        break
-      case PageIds.ChangePassword:
-        page = new ChangePassword()
-        break
-      case PageIds.Page404:
-        page = new Page404()
-        break
-      case PageIds.Page500:
-        page = new Page500()
-        break
+    switch (id) {
+      case Pages.Chat:
+        page = new Chat();
+        break;
+      case Pages.SignIn:
+        page = new SignIn();
+        break;
+      case Pages.SignUp:
+        page = new SignUp();
+        break;
+      case Pages.Profile:
+        page = new Profile();
+        break;
+      case Pages.ProfileEdit:
+        page = new ProfileEdit();
+        break;
+      case Pages.ChangePassword:
+        page = new ChangePassword();
+        break;
+      case Pages.Page404:
+        page = new Page404();
+        break;
+      case Pages.Page500:
+        page = new Page500();
+        break;
       default:
-        page = new MainPage()
-        break
+        page = new MainPage();
+        break;
     }
 
     if (page !== null) {
-      App.bodyContainer.innerHTML = ''
-      App.bodyContainer.append(page.element)
+      App.body.textContent = '';
+      App.body.append(page.element);
     }
   }
 
-  enableRouteChange (): void {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1)
-      App.pages(hash)
-    }
-
-    window.addEventListener('hashchange', handleHashChange)
-    handleHashChange()
+  routes(): void {
+    const handleHashChange = () => { App.pages(window.location.hash.slice(1)) };
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
   }
 
-  run (): void {
-    App.pages(PageIds.MainPage)
-    this.enableRouteChange()
+  run(): void {
+    App.pages(Pages.MainPage);
+    this.routes();
   }
 }

@@ -17,12 +17,12 @@ export default class ProfileEditPage extends Component {
           subtitle: 'Редактирование',
         }),
         inputs: [
-          new Input('input-container', 'first_name', 'Игорь'),
-          new Input('input-container', 'second_name', 'Волков'),
-          new Input('input-container', 'display_name', 'Igor38384'),
-          new Input('input-container', 'login', 'Igor38384'),
-          new Input('input-container', 'email', 'igor@igor.ru'),
-          new Input('input-container', 'phone', '563554'),
+          new Input('input-container', 'first_name'),
+          new Input('input-container', 'second_name'),
+          new Input('input-container', 'display_name'),
+          new Input('input-container', 'login'),
+          new Input('input-container', 'email'),
+          new Input('input-container', 'phone'),
         ],
         button: new Button({
           attr: {
@@ -47,29 +47,29 @@ export default class ProfileEditPage extends Component {
           text: 'Меню навигации',
         }),
       ],
-    }
-    props.events = {
-      submit: {
-        handler: (e: { preventDefault: () => void }) => {
-          e.preventDefault()
-          Input.validate()
+      events: {
+        submit: {
+          handler: (event: { preventDefault: () => void }) => {
+            event.preventDefault()
+            Input.validation()
+          },
+          capture: false,
         },
-        capture: false,
-      },
-      focus: {
-        handler: (e) => {
-          e.preventDefault()
+        focus: {
+          handler: (event: { preventDefault: () => void }) => {
+            event.preventDefault()
+          },
+          capture: true,
         },
-        capture: true,
-      },
-      blur: {
-        handler: (e) => {
-          e.preventDefault()
-          if (e.target != null && e.target instanceof HTMLInputElement) {
-            Input.validateInputs(e.target)
-          }
+        blur: {
+          handler: (event: { preventDefault: () => void, target: HTMLInputElement | null }) => {
+            event.preventDefault()
+            if (event.target !== null && event.target instanceof HTMLInputElement) {
+              Input.checkInput(event.target)
+            }
+          },
+          capture: true,
         },
-        capture: true,
       },
     }
     super('main', props)
