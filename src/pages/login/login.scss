@@ -1,0 +1,26 @@
+@import "../../styles/variable";
+
+.login-page__form {
+  margin: 50px auto;
+  width: 25vw;
+}
+
+.login-page__header {
+  text-align: center;
+}
+
+.login-page__input-groups {
+  display: flex;
+  flex-direction: column;
+  margin-top: $m;
+}
+
+.login-page__label {
+  color: grey;
+}
+
+.login-page__link {
+  background-color: white;
+  color: black;
+  text-align: center;
+}

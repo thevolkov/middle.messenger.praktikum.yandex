@@ -1,14 +1,12 @@
 @import "variable";
-@import "../base/input/input";
-@import "../base/button/button";
-@import "../base/link/link";
-@import "../base/title/title";
-@import "../base/avatar/avatar";
+@import "../components/chat/chat";
+@import "../components/leftpanel/leftpanel";
+@import "../components/rightpanel/rightpanel";
+@import "../pages/login/login";
 @import "../pages/profile/profile";
-@import "../pages/chat/chat";
-@import "../pages/chat/chatBlocks/chatItem/chatItem";
-@import "../pages/chat/chatBlocks/chatList/chatList";
-@import "../pages/chat/chatBlocks/chatPanel/chatPanel";
+@import "../pages/signup/signup";
+@import "../pages/user/user";
+@import "../pages/error/error";
 
 * {
   box-sizing: border-box;
@@ -28,28 +26,31 @@ html {
   color: $black;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  position: relative;
-  overflow-y: hidden;
-  font-size: $m;
-}
+//body {
+//  padding: 0;
+//  margin: 0;
+//  position: relative;
+//  overflow-y: hidden;
+//  font-size: $m;
+//}
 
 h1 {
   text-align: center;
   text-transform: uppercase;
   font-size: $l;
   margin: 0 0 $l 0;
+  font-family: Bitter, serif;
+  font-weight: 700;
 }
 
 main {
-  box-sizing: border-box;
-  height: 100vh;
-  padding: $l;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  //box-sizing: border-box;
+  //height: 100vh;
+  //padding: $l;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  margin: auto;
 }
 
 li {
@@ -63,24 +64,58 @@ li {
   }
 }
 
+span {
+  color: $dark-red;
+  font-size: $m;
+}
+
+//button {
+//  border: 1px solid $black;
+//  padding: 5px;
+//  min-width: $l;
+//  height: $l;
+//  border-radius: 5px;
+//  background: none;
+//  cursor: pointer;
+//  justify-content: center;
+//  align-items: center;
+//}
+//
+//input {
+//  width: 100%;
+//  padding: 5px $s;
+//  height: $l;
+//  outline: none;
+//  font-family: "PT Sans", serif;
+//}
 button {
-  border: 1px solid $black;
-  padding: 5px;
-  min-width: $l;
-  height: $l;
-  border-radius: 5px;
-  background: none;
+  background-color: $black;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 0.5em;
+  margin: $s 0;
   cursor: pointer;
-  justify-content: center;
-  align-items: center;
+}
+
+form {
+  //border: 1px solid $black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: fit-content;
 }
 
 input {
-  width: 100%;
-  padding: 5px $s;
-  height: $l;
+  border: hidden;
+  border-bottom: 1px solid $black;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 0.5em;
   outline: none;
-  font-family: "PT Sans", serif;
 }
 
 .position {
@@ -133,4 +168,15 @@ input {
   :first-of-type {
     margin-right: $s;
   }
+}
+
+.circle {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-width: 35px;
+  min-height: 35px;
+  margin: 0;
 }

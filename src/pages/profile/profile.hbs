@@ -1,13 +1,26 @@
-<div class={{class}}>
-  {{{title}}}
-
-  {{#each pages}}
-    <div class="profile__value">
-      <span class="small-text">{{type}}</span>
-      <p>{{value}}</p>
-    </div>
-  {{/each}}
-
-  {{{button}}}
+<div class='profile-page__button-panel'>
   {{{link}}}
+</div>
+
+<div class='profile-page__profile'>
+  <div class='profile__avatar-container'>
+    {{#if ava}}
+    <img class="profile__avatar" src="https://ya-praktikum.tech/api/v2/resources/{{ava}}">
+    {{else}}
+    <div class='avatar-container__avatar circle'></div>
+    {{/if}}
+    {{#if user_name}}
+    <h2>{{user_name}}</h2>
+    {{/if}}
+  </div>
+  <div>
+    {{{input}}}
+    {{{button}}}
+  </div>
+  <div class='profile__inputs'>
+    {{{inputgroups}}}
+  </div>
+  <div class='profile__buttons'>
+    {{{buttons}}}
+  </div>
 </div>

@@ -1,13 +1,76 @@
-.profile {
-  &__value {
-    text-align: center;
+@import "../../styles/variable";
 
-    & p {
-      height: 30px;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-      display: flex;
-    }
-  }
+.profile-page {
+  display: flex;
+  height: 100%;
+}
+
+.profile-page__button-panel {
+  align-items: center;
+  background-color: $white;
+  display: flex;
+  padding: 1em;
+}
+
+.profile-page__profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  row-gap: 2em;
+}
+
+.profile__avatar {
+  background-color: $white;
+  height: 150px;
+}
+
+.profile__avatar-container {
+  text-align: center;
+  width: 150px;
+}
+
+.avatar-container__avatar {
+  background-color: $black;
+}
+
+.profile__inputs {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.profile__input-group {
+  //border-bottom: 2px solid $black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__input {
+  border: none;
+  pointer-events: none;
+  text-align: right;
+}
+
+.profile__buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons__save-button {
+  display: none;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.buttons__change-data-button,
+.buttons__change-password-button {
+  background-color: inherit;
+  color: $dark-red;
+}
+
+.buttons__exit-button {
+  background-color: inherit;
+  color: red;
 }
