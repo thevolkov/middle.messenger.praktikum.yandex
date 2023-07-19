@@ -1,21 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "typeRoots": [ "node_modules/@types" ],
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "lib": [
-      "dom",
-      "es5",
-      "es2017",
-      "scripthost",
-      "es2015.proxy"
-    ]
+    "target": "es5"
   },
-  "include": [
-    "src",
-    "src/types/hbs.d.ts"
+  "exclude": [
+    "dist",
+    "node_modules"
   ]
 }
