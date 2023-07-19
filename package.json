@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "npm run build && npm run serve",
-    "build": "npm run clean && parcel build index.html",
+    "build": "parcel build",
     "serve": "node ./server.js",
     "dev": "parcel index.html --port 3030",
     "clean": "rm -rf ./dist/*",
