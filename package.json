@@ -41,7 +41,7 @@
     "start": "npm run build && npm run serve",
     "build": "parcel build",
     "serve": "node ./server.js",
-    "dev": "parcel index.html --port 3030",
+    "dev": "parcel src/index.html --port 3000",
     "clean": "rm -rf ./dist/*",
     "eslint": "eslint . --ext .ts --fix",
     "stylelint": "stylelint './src/**/*.scss' --fix",

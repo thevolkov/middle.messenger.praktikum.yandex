@@ -1,9 +1,9 @@
-import LoginPage from './src/pages/login/login'
-import SignupPage from './src/pages/signup/signup'
-import ProfilePage from './src/pages/profile/profile'
-import UserPage from './src/pages/user/user'
-import Router from './src/core/router'
-import './src/styles/main.scss';
+import LoginPage from './pages/login/login'
+import SignupPage from './pages/signup/signup'
+import ProfilePage from './pages/profile/profile'
+import UserPage from './pages/user/user'
+import Router from './core/router'
+import './styles/main.scss';
 
 export const enum Pages {
   Login = '/',
