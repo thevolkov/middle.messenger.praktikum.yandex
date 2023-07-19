@@ -37,6 +37,7 @@
     "typescript": "~4.5.5",
     "uuid": "9.0.0"
   },
+  "source": "src/index.html",
   "scripts": {
     "start": "npm run build && npm run serve",
     "build": "parcel build",
