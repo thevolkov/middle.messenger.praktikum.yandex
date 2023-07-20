@@ -9,9 +9,7 @@ class UserController {
         const parsed = JSON.parse(xhr.response)
         store.set('user', parsed)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public changePassword(data: ChangePasswordData) {
@@ -20,9 +18,7 @@ class UserController {
       .then((xhr) => {
         console.log(xhr)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public changeProfile(data: ChangeProfileData) {
@@ -31,9 +27,7 @@ class UserController {
       .then((xhr) => {
         console.log(xhr)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 }
 export default new UserController()

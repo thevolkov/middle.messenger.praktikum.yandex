@@ -54,11 +54,7 @@ class AuthController {
         store.set('user', JSON.parse(xhr.response))
         console.log('AuthController - getUser - OK')
       })
-      .catch((error) => {
-        console.log(error)
-      })
-    // store.set('key', 'value')
-    // console.log(store.getState())
+      .catch((error) => console.error(error))
   }
 }
 export default new AuthController()

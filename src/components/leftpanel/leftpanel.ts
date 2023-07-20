@@ -6,6 +6,8 @@ import Link from '../../components/link/link'
 import template from './leftpanel.hbs'
 import store, { StoreEvents } from '../../core/store'
 import chatController from '../../controllers/chatController'
+import { BASE_URL } from '../../constants';
+import defaultAvatar from '../../../static/chat_avatar.png';
 
 export default class LeftPanel extends Component {
   constructor () {
@@ -51,7 +53,6 @@ export default class LeftPanel extends Component {
     store.on(StoreEvents.Updated, () => {
       const chats = store.getState().chats
       const activeChat = store.getState().activeChat
-      console.log(activeChat);
       if (chats != null) {
         const children: Chat[] = []
 
@@ -59,12 +60,9 @@ export default class LeftPanel extends Component {
           let name = chat.title
           let time = ''
           let message = ''
-
+          let avatar = chat.avatar;
           if (chat.last_message != null) {
-            const user = chat.last_message.user
-            if (user != null) {
-              name = user.login
-            }
+            name = chat.title
             time = chat.last_message.time.substring(0, 10)
             message = chat.last_message.content
           }
@@ -78,6 +76,9 @@ export default class LeftPanel extends Component {
             message_time: time,
             message_text: message,
             message_count: chat.unread_count,
+            avatar_link: avatar
+              ? `${BASE_URL}/resources${avatar}`
+              : defaultAvatar,
           }))
         })
         this.children.chats = children

@@ -1,4 +1,5 @@
 import BaseAPI from './baseAPI'
+import { BASE_URL } from '../constants'
 
 export type ChangePasswordData = {
   oldPassword: string
@@ -16,7 +17,7 @@ export type ChangeProfileData = {
 
 class UserAPI extends BaseAPI {
   constructor () {
-    super('https://ya-praktikum.tech/api/v2/user')
+    super(`${BASE_URL}/user`)
   }
 
   async changeAvatar (data: FormData): Promise<XMLHttpRequest> {

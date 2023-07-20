@@ -16,9 +16,7 @@ class ChatController {
           console.log('OK')
         }
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public createChat (title: string): void {
@@ -27,9 +25,7 @@ class ChatController {
         console.log(xhr)
         this.getChats()
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public deleteChat (id: number): void {
@@ -40,9 +36,7 @@ class ChatController {
         store.set('activeChat', null)
         this.getChats()
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public addUserToChat (id: number, userId: number): void {
@@ -50,9 +44,7 @@ class ChatController {
       .then((xhr) => {
         console.log(xhr)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 
   public deleteUserFromChat (id: number, userId: number): void {
@@ -60,9 +52,7 @@ class ChatController {
       .then((xhr) => {
         console.log(xhr)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.error(error))
   }
 }
 export default new ChatController()

@@ -6,6 +6,8 @@ import MessagePanel from '../../components/messagepanel/messagepanel'
 import template from './rightpanel.hbs'
 import store, { StoreEvents } from '../../core/store'
 import chatController from '../../controllers/chatController'
+import { BASE_URL } from '../../constants'
+import defaultAvatar from '../../../static/chat_avatar.png'
 
 export default class RightPanel extends Component {
   constructor () {
@@ -42,7 +44,7 @@ export default class RightPanel extends Component {
         new Button({
           attr: {
             class: 'top-panel__button',
-            textContent: 'Удалить', // <i class='fa-solid fa-ellipsis-vertical'></i>
+            textContent: 'Удалить',
           },
           events: {
             click: {
@@ -67,7 +69,7 @@ export default class RightPanel extends Component {
           events: {
             click: {
               handler: (e) => {
-                chatController.deleteChat(this.props.name)
+                chatController.deleteChat(store.getState().activeChat)
               },
               capture: false,
             },
@@ -79,9 +81,15 @@ export default class RightPanel extends Component {
     }
     super('div', props)
     store.on(StoreEvents.Updated, () => {
-      const activeChat = store.getState().activeChat
+      const activeChatId = store.getState().activeChat
+      const activeChat = activeChatId && store.getState().chats.find((item) => item.id === store.getState().activeChat)
       if (activeChat != null) {
-        this.setProps({ name: activeChat })
+        this.setProps({
+          name: activeChat.title,
+          avatar_link: activeChat.avatar
+            ? `${BASE_URL}/resources${activeChat.avatar}`
+            : defaultAvatar
+        })
         this.show()
       } else {
         this.hide()

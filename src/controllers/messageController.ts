@@ -44,25 +44,28 @@ class MessageController {
               console.log('Ошибка', event.message)
             })
           })
-          .catch((error) => {
-            console.log(error)
-          })
+          .catch((error) => console.error(error))
       }
     })
   }
 
-  private message (data: unknown): void {
+  private message(data: unknown): void {
     if (data != null) {
-      const parsed = JSON.parse(data)
-      if (Array.isArray(parsed)) {
-        if (parsed.length > 0) {
-          store.set('messages', parsed)
+      try {
+        const parsed = JSON.parse(data);
+
+        if (Array.isArray(parsed)) {
+          if (parsed.length > 0) {
+            store.set('messages', parsed);
+          } else {
+            store.set('messages', []);
+          }
         } else {
-          store.set('messages', [])
+          console.log('MessageController - new message');
+          store.set('newMessage', parsed);
         }
-      } else {
-        console.log('MessageController - new message')
-        store.set('newMessage', parsed)
+      } catch (error) {
+        console.error('Error parsing message data:', error);
       }
     }
   }

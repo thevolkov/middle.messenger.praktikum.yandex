@@ -1,4 +1,5 @@
 import BaseAPI from './baseAPI'
+import { BASE_URL } from '../constants'
 
 export type SigninData = {
   login: string
@@ -16,7 +17,7 @@ export type SignupData = {
 
 class AuthAPI extends BaseAPI {
   constructor () {
-    super('https://ya-praktikum.tech/api/v2/auth')
+    super(`${BASE_URL}/auth`)
   }
 
   async signup (data: SignupData): Promise<XMLHttpRequest> {

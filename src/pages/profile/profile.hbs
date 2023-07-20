@@ -4,8 +4,8 @@
 
 <div class='profile-page__profile'>
   <div class='profile__avatar-container'>
-    {{#if ava}}
-    <img class="profile__avatar" src="https://ya-praktikum.tech/api/v2/resources/{{ava}}">
+    {{#if avatar_link}}
+    <img class="profile__avatar" src="{{avatar_link}}">
     {{else}}
     <div class='avatar-container__avatar circle'></div>
     {{/if}}

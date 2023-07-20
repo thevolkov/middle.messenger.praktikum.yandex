@@ -7,6 +7,8 @@ import template from './profile.hbs'
 import authController from '../../controllers/authController'
 import userController from '../../controllers/userController'
 import store, { StoreEvents } from '../../core/store'
+import { BASE_URL } from '../../constants'
+import defaultAvatar from '../../../static/chat_avatar.png'
 
 export default class ProfilePage extends Component {
   constructor () {
@@ -142,7 +144,11 @@ export default class ProfilePage extends Component {
     store.on(StoreEvents.Updated, () => {
       const user = store.getState().user
       if (user != null) {
-        this.setProps({ ava: user.avatar })
+        this.setProps({
+          avatar_link: user.avatar
+            ? `${BASE_URL}/resources${user.avatar}`
+            : defaultAvatar
+        })
       }
     })
   }

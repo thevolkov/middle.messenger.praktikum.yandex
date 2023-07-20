@@ -1,8 +1,9 @@
 import BaseAPI from './baseAPI'
+import { BASE_URL } from '../constants'
 
 class ChatAPI extends BaseAPI {
   constructor () {
-    super('https://ya-praktikum.tech/api/v2/chats')
+    super(`${BASE_URL}/chats`)
   }
 
   async getChats (/* offset: number = 0, limit: number = 10, titleToFilter: string = ''*/): Promise<XMLHttpRequest> {
