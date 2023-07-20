@@ -1,0 +1,47 @@
+@import "../../styles/variable";
+
+.chat {
+  display: grid;
+  grid-template-areas:
+    "photo name time"
+    "photo text count";
+  grid-column-gap: 1em;
+  padding: 1em;
+}
+
+.chat:hover {
+  background-color: $light-black;
+}
+
+.chat__photo {
+  background-color: $white;
+  border-radius: 100%;
+  grid-area: photo;
+  width: $xl;
+  height: $xl;
+}
+
+.chat__name {
+  align-self: start;
+  grid-area: name;
+}
+
+.chat__message-time {
+  align-self: start;
+  justify-self: end;
+  grid-area: time;
+}
+
+.chat__message-text {
+  align-self: start;
+  grid-area: text;
+}
+
+.chat__message-count {
+  align-self: end;
+  background-color: $dark-red;
+  color: white;
+  grid-area: count;
+  justify-self: end;
+  width: 2em;
+}

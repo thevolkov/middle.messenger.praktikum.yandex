@@ -1,0 +1,76 @@
+@import "../../styles/variable";
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-left: $m;
+}
+
+.right-panel__top-panel {
+  align-items: center;
+  border-bottom: 1px solid $black;
+  column-gap: 1em;
+  display: flex;
+  padding: 0.5em;
+}
+
+.top-panel__avatar-container {
+  width: 5em;
+}
+
+.top-panel__name {
+  flex-grow: 1;
+}
+
+.top-panel__button {
+  background-color: inherit;
+  color: black;
+  height: 3em;
+}
+
+.right-panel__messages {
+  flex-grow: 1;
+  flex-direction: column-reverse;
+  display: flex;
+}
+
+.right-panel__message {
+  background-color: $light-black;
+  border-radius: 0 5px 5px;
+  display: flex;
+  margin: 0 $m $m;
+  padding: $m;
+  width: 50%;
+}
+
+.right-panel__my-message {
+  align-self: flex-end;
+  background-color: $black;
+  color: $white;
+  border-radius: 5px 5px 0;
+  display: flex;
+  margin: 0 $m $m;
+  padding: $m;
+  width: 50%;
+}
+
+.right-panel__bottom-panel {
+  align-items: center;
+  border-top: 1px solid $black;
+  column-gap: 1em;
+  display: flex;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+
+.bottom-panel__actions-button {
+  background-color: inherit;
+  color: black;
+}
+
+.bottom-panel__input {
+  background-color: $light-black;
+  border: none;
+  border-radius: 8px;
+  flex-grow: 1;
+}

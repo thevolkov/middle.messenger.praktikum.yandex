@@ -1,0 +1,26 @@
+@import "../../styles/variable";
+
+.signup-page__form {
+  margin: auto;
+  width: 25vw;
+}
+
+.signup-page__header {
+  text-align: center;
+}
+
+.signup-page__input-groups {
+  display: flex;
+  flex-direction: column;
+  margin-top: $m;
+}
+
+.signup-page__label {
+  color: grey;
+}
+
+.signup-page__link {
+  background-color: white;
+  color: black;
+  text-align: center;
+}

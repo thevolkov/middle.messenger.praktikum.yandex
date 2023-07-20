@@ -1,44 +1,159 @@
-import Component from '../../utils/Component'
+import Component from '../../core/component'
+import Button from '../../components/button/button'
+import Input from '../../components/input/input'
+import InputGroup from '../../components/inputgroup/inputgroup'
+import Link from '../../components/link/link'
 import template from './profile.hbs'
-import Button from '../../base/button/button'
-import Title from '../../base/title/title'
-import Link from '../../base/link/link'
-import { ProfileData } from './constants'
+import authController from '../../controllers/authController'
+import userController from '../../controllers/userController'
+import store, { StoreEvents } from '../../core/store'
+import { BASE_URL } from '../../constants'
+import defaultAvatar from '../../../static/chat_avatar.png'
 
 export default class ProfilePage extends Component {
   constructor () {
-    super('main', {
-      title: new Title({
-        attr: { class: 'title' },
-        text: 'МОЙ ПРОФИЛЬ',
+    const props = {
+      attr: { class: 'profile-page' },
+
+      link: new Link({
+        attr: {
+          class: 'circle',
+          textContent: 'Назад',
+        },
+        href: '/messenger',
       }),
-      pages: ProfileData,
+
+      input: new Input({
+        attr: {
+          id: 'profile__avatar-input',
+          type: 'file',
+        },
+      }),
+
       button: new Button({
         attr: {
-          class: ['button', 'button__black'],
+          textContent: 'Изменить аватар',
         },
-        text: 'РЕДАКТИРОВАТЬ',
+        events: {
+          click: {
+            handler: () => {
+              const input = document.getElementById('profile__avatar-input')
+              if (input != null && input.files.length > 0) {
+                const file = input.files[0]
+                const data = new FormData()
+                data.append('avatar', file)
+                userController.changeAvatar(data)
+                input.value = null
+              }
+            },
+            capture: false,
+          },
+        },
       }),
-      link: [
-        new Link({
+
+      inputgroups: [
+        new InputGroup('profile__input-group', 'email'),
+        new InputGroup('profile__input-group', 'login'),
+        new InputGroup('profile__input-group', 'first_name'),
+        new InputGroup('profile__input-group', 'nick'),
+        new InputGroup('profile__input-group', 'second_name'),
+        new InputGroup('profile__input-group', 'phone'),
+        new InputGroup('profile__input-group', 'old_password'),
+        new InputGroup('profile__input-group', 'password'),
+        new InputGroup('profile__input-group', 'password_repeat'),
+      ],
+      buttons: [
+        new Button({
           attr: {
-            class: ['link'],
-            href: '#main',
+            class: 'buttons__change-data-button',
+            textContent: 'Изменить данные',
           },
-          text: 'Назад',
+          events: {
+            click: {
+              handler: () => {
+                let isValid = true
+                const fields = {}
+                const inputs = document.querySelectorAll('input')
+                inputs.forEach((input) => {
+                  if(input.type !== 'file' && input.type !== 'password') {
+                    if(InputGroup.validateInputGroup(input)) {
+                      fields[input.name] = input.value
+                    } else {
+                      isValid = false
+                    }
+                  }
+                })
+                if(isValid) {
+                  userController.changeProfile(fields)
+                }
+              },
+              capture: false,
+            },
+          },
         }),
-        new Link({
+        new Button({
           attr: {
-            class: ['link', 'link__red'],
-            href: '#main',
+            class: 'buttons__change-password',
+            textContent: 'Изменить пароль',
           },
-          text: 'Меню навигации',
+          events: {
+            click: {
+              handler: () => {
+                const oldPassword = document.getElementsByName('oldPassword')[0]
+                const newPassword = document.getElementsByName('password')[0]
+                const repeatPassword = document.getElementsByName('newPassword')[0].value
+
+                if(InputGroup.validateInputGroup(oldPassword) && InputGroup.validateInputGroup(newPassword)) {
+                  if(oldPassword.value === newPassword.value) {
+                    console.log('Profile - change password - old === new')
+                  } else if (newPassword.value !== repeatPassword) {
+                    console.log('Profile - change password - password !== repeatPassword')
+                  } else {
+                    userController.changePassword({
+                      oldPassword: oldPassword.value,
+                      newPassword: newPassword.value
+                    })
+                  }
+                }
+              },
+              capture: false
+            }
+          }
+        }),
+        new Button({
+          attr: {
+            class: 'buttons__exit-button',
+            textContent: 'Выйти',
+          },
+          events: {
+            click: {
+              handler: () => {
+                authController.logout()
+              },
+              capture: false,
+            },
+          },
         }),
       ],
+    }
+
+    super('main', props)
+
+    authController.getUser()
+
+    store.on(StoreEvents.Updated, () => {
+      const user = store.getState().user
+      if (user != null) {
+        this.setProps({
+          avatar_link: user.avatar
+            ? `${BASE_URL}/resources${user.avatar}`
+            : defaultAvatar
+        })
+      }
     })
   }
 
-  render (): string {
-    return template(this.getPropsAndChildren())
+  render (): DocumentFragment {
+    return this.compile(template, this.props)
   }
 }
