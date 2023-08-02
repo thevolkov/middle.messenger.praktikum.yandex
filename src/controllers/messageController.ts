@@ -2,8 +2,8 @@ import chatAPI from '../api/chatAPI'
 import store, { StoreEvents } from '../core/store'
 
 class MessageController {
-  private chatId: number
-  private userId: number
+  private chatId: number | undefined
+  private userId: number | undefined
   private socket: WebSocket | null
 
   constructor () {

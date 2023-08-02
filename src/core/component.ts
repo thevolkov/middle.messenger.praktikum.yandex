@@ -10,7 +10,7 @@ enum EVENTS {
 // @ts-expect-error
 export default abstract class Component<Props extends Record<string, any> = unknown> {
   protected id: string
-  protected _element: HTMLElement
+  protected _element: any
   protected _meta: Record<string, unknown>
   protected props: Props
   protected children: Record<string, Component | Component[]>
@@ -160,7 +160,6 @@ export default abstract class Component<Props extends Record<string, any> = unkn
       if (key === 'class') {
         this._element.classList.add(value as string)
       } else {
-        // @ts-expect-error
         this._element[key] = value
       }
     })

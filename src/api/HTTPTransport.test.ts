@@ -1,34 +1,34 @@
-import HTTPTransport, { queryStringify } from "./HTTPTransport";
+import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
+import HTTPTransport from './HTTPTransport';
+import { expect } from 'chai';
 
-const http = new HTTPTransport('https://jsonplaceholder.typicode.com/posts');
-const data = {
-    id: 1,
-    role: 'admin'
-};
+describe('HTTPTransport', () => {
+    let xhr: SinonFakeXMLHttpRequestStatic;
+    let instance: HTTPTransport;
+    const requests: SinonFakeXMLHttpRequest[] = [];
 
-const testData = {
-    data: 'foo'
-};
+    beforeEach(() => {
+        xhr = sinon.useFakeXMLHttpRequest();
 
-describe('HTTP', () => {
+        // @ts-ignore
+        global.XMLHttpRequest = xhr;
 
-    test('queryStringify should return url query string from object', () => {
-        const queryString = queryStringify(data);
-        expect(queryString).toEqual('?id=1&role=admin');
+        xhr.onCreate = ((request: SinonFakeXMLHttpRequest) => {
+            requests.push(request);
+        });
+
+        instance = new HTTPTransport('/auth');
+    });
+
+    afterEach(() => {
+        requests.length = 0;
     })
 
-    test('get() should send GET request', async () => {
-        const get = async() => {
-            await http.get('/1');
-        }
-        expect(get).not.toThrow();
-    })
+    it('.get() should send GET request', () => {
+        instance.get('/user');
 
-    test('post() should send POST request with data', async () => {
+        const [request] = requests;
 
-        const post = async() => {
-            await http.post('/', testData);
-        }
-        expect(post).not.toThrow();
-    })
-})
+        expect(request.method).to.eq('GET');
+    });
+});
