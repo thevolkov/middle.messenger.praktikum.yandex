@@ -1,21 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "types": [
+      "mocha",
+      "node"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "noImplicitAny": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "lib": [
-      "dom",
-      "es5",
-      "es2017",
-      "scripthost",
-      "es2015.proxy"
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "typed-scss-modules"
+      }
     ]
   },
   "include": [
-    "src",
-    "src/types/hbs.d.ts"
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

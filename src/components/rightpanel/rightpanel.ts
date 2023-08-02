@@ -7,6 +7,7 @@ import template from './rightpanel.hbs'
 import store, { StoreEvents } from '../../core/store'
 import chatController from '../../controllers/chatController'
 import { BASE_URL } from '../../constants'
+// @ts-ignore
 import defaultAvatar from '../../../static/chat_avatar.png'
 
 export default class RightPanel extends Component {
@@ -23,17 +24,21 @@ export default class RightPanel extends Component {
         new Button({
           attr: {
             class: 'top-panel__button',
-            textContent: 'Добавить',
+            textContent: 'Добавить', // <i class='fa-solid fa-ellipsis-vertical'></i>
           },
           events: {
             click: {
-              handler: (e) => {
-                const input = this.children.input.getContent()
-                if (input.value !== '') {
-                  const userId = parseInt(input.value)
-                  if (!isNaN(userId)) {
-                    chatController.addUserToChat(this.props.name, userId)
-                    input.value = ''
+              handler: () => {
+                console.log('Right Panel - add user')
+                if (!Array.isArray(this.children.input)) {
+                  const input = this.children.input.getContent() as HTMLInputElement
+                  if (input.value !== '') {
+                    const userId = parseInt(input.value)
+                    if (!isNaN(userId)) {
+                      // @ts-expect-error
+                      chatController.addUserToChat(this.props.name, userId)
+                      input.value = ''
+                    }
                   }
                 }
               },
@@ -44,17 +49,21 @@ export default class RightPanel extends Component {
         new Button({
           attr: {
             class: 'top-panel__button',
-            textContent: 'Удалить',
+            textContent: 'Удалить', // <i class='fa-solid fa-ellipsis-vertical'></i>
           },
           events: {
             click: {
-              handler: (e) => {
-                const input = this.children.input.getContent()
-                if (input.value !== '') {
-                  const userId = parseInt(input.value)
-                  if (!isNaN(userId)) {
-                    chatController.deleteUserFromChat(this.props.name, userId)
-                    input.value = ''
+              handler: () => {
+                console.log('Right Panel - delete user')
+                if (!Array.isArray(this.children.input)) {
+                  const input = this.children.input.getContent() as HTMLInputElement
+                  if (input.value !== '') {
+                    const userId = parseInt(input.value)
+                    if (!isNaN(userId)) {
+                      // @ts-expect-error
+                      chatController.deleteUserFromChat(this.props.name, userId)
+                      input.value = ''
+                    }
                   }
                 }
               },
@@ -64,12 +73,15 @@ export default class RightPanel extends Component {
         }),
         new Button({
           attr: {
-            textContent: 'Удалить чат',
+            // class: 'top-panel__button',
+            textContent: 'Удалить чат', // <i class='fa-solid fa-ellipsis-vertical'></i>
           },
           events: {
             click: {
-              handler: (e) => {
-                chatController.deleteChat(store.getState().activeChat)
+              handler: () => {
+                console.log('Right Panel - delete chat')
+                // @ts-expect-error
+                chatController.deleteChat(this.props.name)
               },
               capture: false,
             },
@@ -81,17 +93,17 @@ export default class RightPanel extends Component {
     }
     super('div', props)
     store.on(StoreEvents.Updated, () => {
-      const activeChatId = store.getState().activeChat
-      const activeChat = activeChatId && store.getState().chats.find((item) => item.id === store.getState().activeChat)
+      const activeChat = store.getState().activeChat
       if (activeChat != null) {
         this.setProps({
           name: activeChat.title,
           avatar_link: activeChat.avatar
-            ? `${BASE_URL}/resources${activeChat.avatar}`
-            : defaultAvatar
+              ? `${BASE_URL}/resources${activeChat.avatar}`
+              : defaultAvatar
         })
         this.show()
       } else {
+        console.log('ACTIVE CHAT IS NULL')
         this.hide()
       }
     })

@@ -12,7 +12,7 @@ type Options = {
   timeout?: number
 }
 
-function queryStringify (data: any): string {
+export function queryStringify (data: any): string {
   if (typeof data !== 'object') {
     throw new Error('Data must be object')
   }
@@ -51,7 +51,7 @@ export default class HTTPTransport {
     return await this.request(url, { ...options, method: METHOD.DELETE }, options.timeout)
   }
 
-  async request (url: string, options: Options = { method: METHOD.DELETE }, timeout: number = 5000): Promise<XMLHttpRequest> {
+  async request (url: string, options: Options = { method: METHOD.DELETE }, timeout = 5000): Promise<XMLHttpRequest> {
     url = this.host + url
     const { method, headers = {}, data } = options
 

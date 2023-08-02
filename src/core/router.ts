@@ -1,10 +1,10 @@
 import Route from './route'
 
 export default class Router {
-  private readonly routes: Route[]
-  private readonly history: History
-  private _currentRoute: Route | null
-  private readonly _rootQuery: string
+  private readonly routes: Route[] | undefined
+  private readonly history: History | undefined
+  private _currentRoute: Route | null | undefined
+  private readonly _rootQuery: string | undefined
   private static __instance: Router | null
 
   constructor (rootQuery: string) {
@@ -22,7 +22,7 @@ export default class Router {
 
   use (pathname: string, block: unknown): Router {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery })
-    this.routes.push(route)
+    this.routes && this.routes.push(route)
     return this
   }
 
@@ -47,7 +47,7 @@ export default class Router {
   }
 
   go (pathname: string): void {
-    this.history.pushState({}, '', pathname)
+    this.history && this.history.pushState({}, '', pathname)
     this._onRoute(pathname)
   }
 
@@ -66,6 +66,6 @@ export default class Router {
   // }
 
   getRoute (pathname: string): Route | undefined {
-    return this.routes.find((route) => route.match(pathname))
+    return this.routes && this.routes.find((route) => route.match(pathname))
   }
 }
