@@ -1,12 +1,12 @@
 @import url("variable.scss");
-@import "../components/chat/chat.scss";
-@import "../components/leftpanel/leftpanel.scss";
-@import "../components/rightpanel/rightpanel.scss";
-@import "../pages/login/login.scss";
-@import "../pages/profile/profile.scss";
-@import "../pages/signup/signup.scss";
-@import "../pages/user/user.scss";
-@import "../pages/error/error.scss";
+@import url("../components/chat/chat.scss");
+@import url("../components/leftpanel/leftpanel.scss");
+@import url("../components/rightpanel/rightpanel.scss");
+@import url("../pages/login/login.scss");
+@import url("../pages/profile/profile.scss");
+@import url("../pages/signup/signup.scss");
+@import url("../pages/user/user.scss");
+@import url("../pages/error/error.scss");
 
 * {
   box-sizing: border-box;
