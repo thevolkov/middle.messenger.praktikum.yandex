@@ -63,7 +63,7 @@ export default class LeftPanel extends Component {
           let name = chat.title
           let time = ''
           let message = ''
-          let avatar = chat.avatar;
+          const avatar = chat.avatar;
           if (chat.last_message != null) {
             name = chat.title
             time = chat.last_message.time.substring(0, 10)
