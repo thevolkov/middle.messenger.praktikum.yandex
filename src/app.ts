@@ -13,7 +13,7 @@ export const enum Pages {
 }
 
 export default class App {
-  private static readonly router: Router
+  private readonly router: Router
 
   constructor () {
     this.router = new Router('.app')

@@ -8,8 +8,10 @@ export default class Chat extends Component {
       ...props,
       events: {
         click: {
-          handler: (e) => {
+          handler: () => {
+            // @ts-ignore
             if (this.props.id != null && this.props.id !== store.getState().activeChat) {
+              // @ts-ignore
               store.set('activeChat', this.props.id)
             }
           },

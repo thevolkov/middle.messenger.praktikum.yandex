@@ -8,6 +8,8 @@ import authController from '../../controllers/authController'
 import userController from '../../controllers/userController'
 import store, { StoreEvents } from '../../core/store'
 import { BASE_URL } from '../../constants'
+import { type ChangePasswordData, type ChangeProfileData } from '../../api/userAPI'
+// @ts-ignore
 import defaultAvatar from '../../../static/chat_avatar.png'
 
 export default class ProfilePage extends Component {
@@ -37,13 +39,13 @@ export default class ProfilePage extends Component {
         events: {
           click: {
             handler: () => {
-              const input = document.getElementById('profile__avatar-input')
-              if (input != null && input.files.length > 0) {
+              const input = document.getElementById('profile__avatar-input') as HTMLInputElement
+              if (input != null && input.files != null && input.files.length > 0) {
                 const file = input.files[0]
                 const data = new FormData()
                 data.append('avatar', file)
                 userController.changeAvatar(data)
-                input.value = null
+                input.value = ''
               }
             },
             capture: false,
@@ -77,6 +79,7 @@ export default class ProfilePage extends Component {
                 inputs.forEach((input) => {
                   if(input.type !== 'file' && input.type !== 'password') {
                     if(InputGroup.validateInputGroup(input)) {
+                      // @ts-ignore
                       fields[input.name] = input.value
                     } else {
                       isValid = false
@@ -84,7 +87,7 @@ export default class ProfilePage extends Component {
                   }
                 })
                 if(isValid) {
-                  userController.changeProfile(fields)
+                  userController.changeProfile(fields as ChangeProfileData)
                 }
               },
               capture: false,
@@ -99,9 +102,9 @@ export default class ProfilePage extends Component {
           events: {
             click: {
               handler: () => {
-                const oldPassword = document.getElementsByName('oldPassword')[0]
-                const newPassword = document.getElementsByName('password')[0]
-                const repeatPassword = document.getElementsByName('newPassword')[0].value
+                const oldPassword = (document.getElementsByName('oldPassword')[0] as HTMLInputElement)
+                const newPassword = (document.getElementsByName('password')[0] as HTMLInputElement)
+                const repeatPassword = (document.getElementsByName('newPassword')[0] as HTMLInputElement).value
 
                 if(InputGroup.validateInputGroup(oldPassword) && InputGroup.validateInputGroup(newPassword)) {
                   if(oldPassword.value === newPassword.value) {
@@ -112,7 +115,7 @@ export default class ProfilePage extends Component {
                     userController.changePassword({
                       oldPassword: oldPassword.value,
                       newPassword: newPassword.value
-                    })
+                    } as ChangePasswordData)
                   }
                 }
               },

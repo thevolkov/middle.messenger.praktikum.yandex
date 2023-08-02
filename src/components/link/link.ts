@@ -8,10 +8,12 @@ export default class Link extends Component {
       ...props,
       events: {
         click: {
-          handler: (e) => {
+          handler: (e: Event) => {
             e.preventDefault()
-            if (this.props.href != null) {
-              this.router.go(this.props.href)
+            // @ts-ignore
+            const href: string = this.props.href
+            if (href != null) {
+              this.router.go(href)
             }
           },
           capture: false,
@@ -19,6 +21,6 @@ export default class Link extends Component {
       },
     }
     super('button', props)
-    this.router = new Router()
+    this.router = new Router('.app')
   }
 }

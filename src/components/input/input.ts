@@ -8,7 +8,7 @@ export default class Input extends Component {
       const user = store.getState().user
       if (user != null) {
         Object.entries(user).forEach(([key, value]) => {
-          if (this.getContent().name === key) {
+          if ((this.getContent() as HTMLInputElement).name === key) {
             this.setProps({
               attr: {
                 value,

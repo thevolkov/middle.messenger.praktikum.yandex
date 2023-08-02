@@ -15,7 +15,7 @@ export default class MessagePanel extends Component {
       const messages = store.getState().messages
       if (messages != null) {
         const children: Message[] = []
-        messages.forEach((message) => {
+        messages.forEach((message: { user_id: string; content: string }) => {
           children.push(new Message({
             attr: {
               class: (store.getState().user.id === message.user_id) ? 'right-panel__my-message' : 'right-panel__message',

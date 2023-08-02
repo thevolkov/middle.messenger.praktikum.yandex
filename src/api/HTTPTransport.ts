@@ -12,7 +12,7 @@ type Options = {
   timeout?: number
 }
 
-function queryStringify (data: any): string {
+export function queryStringify (data: any): string {
   if (typeof data !== 'object') {
     throw new Error('Data must be object')
   }

@@ -7,6 +7,7 @@ import template from './leftpanel.hbs'
 import store, { StoreEvents } from '../../core/store'
 import chatController from '../../controllers/chatController'
 import { BASE_URL } from '../../constants';
+// @ts-ignore
 import defaultAvatar from '../../../static/chat_avatar.png';
 
 export default class LeftPanel extends Component {
@@ -35,13 +36,15 @@ export default class LeftPanel extends Component {
       chats: [],
       events: {
         click: {
-          handler: (e) => {
+          handler: (e: { target: any; preventDefault: () => void }) => {
             if (e.target instanceof HTMLButtonElement) {
               e.preventDefault()
-              const input = this.children.input.getContent()
-              if (input.value !== '') {
-                chatController.createChat(input.value)
-                input.value = ''
+              if (!Array.isArray(this.children.input)) {
+                const input = this.children.input.getContent() as HTMLInputElement
+                if (input.value !== '') {
+                  chatController.createChat(input.value)
+                  input.value = ''
+                }
               }
             }
           },
@@ -56,7 +59,7 @@ export default class LeftPanel extends Component {
       if (chats != null) {
         const children: Chat[] = []
 
-        chats.forEach((chat) => {
+        chats.forEach((chat: { title: string; avatar: string; last_message: { time: string; content: string } | null; id: string; unread_count: string }) => {
           let name = chat.title
           let time = ''
           let message = ''
