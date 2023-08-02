@@ -1,7 +1,24 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "plugins": [
+    "stylelint-selector-bem-pattern"
+  ],
+  "processors": ["stylelint-processor-html"],
+  "customSyntax": "postcss-html",
   "rules": {
-    "declaration-colon-space-after": "always-single-line"
+    "selector-class-pattern": null,
+    "plugin/selector-bem-pattern": {
+      "componentName": "[A-Z]+",
+      "componentSelectors": {
+        "initial": "^\\.{componentName}(?:-[a-z]+)?$",
+        "combined": "^\\.combined-{componentName}-[a-z]+$"
+      },
+      "utilitySelectors": "^\\.util-[a-z]+$"
+    }
   },
-  "ignoreFiles": [".cache/*", "dist/*"]
+  "ignoreFiles": [
+    "dist/*"
+  ]
 }
